@@ -29,8 +29,8 @@ from environments import equivalence
 from utils import *
 
 def run_exp(rendermode='', testName = "riverSwim", sup = ''):
-    timeHorizon=10000
-    nbReplicates=5
+    timeHorizon = 1000000
+    nbReplicates = 5
     
     if testName == "random_grid":
         env, nbS, nbA = buildGridworld(sizeX=8,sizeY=5,map_name="random",rewardStd=0.01, initialSingleStateDistribution=True)
@@ -87,25 +87,25 @@ def run_exp(rendermode='', testName = "riverSwim", sup = ''):
     names.append(learner1.name())
     cumRewards1 = cumulativeRewards(env,learner1,nbReplicates,timeHorizon,rendermode)#, reverse = True)
     cumRewards.append(cumRewards1)
-    #pickle.dump(cumRewards1, open(("results/cumRewards_" + testName + "_" + learner1.name() + "_" + str(timeHorizon) + sup), 'wb'))
+    pickle.dump(cumRewards1, open(("results/cumRewards_" + testName + "_" + learner1.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
-    #learner2 = PSRL( nbS,nbA, delta=0.05)#, C = C, nC = nC, profile_mapping = profile_mapping)
-    #names.append(learner2.name())
-    #cumRewards2 = cumulativeRewards(env,learner2,nbReplicates,timeHorizon,rendermode)#, reverse = True)
-    #cumRewards.append(cumRewards2)
-    #pickle.dump(cumRewards2, open(("results/cumRewards_" + testName + "_" + learner2.name() + "_" + str(timeHorizon) + sup), 'wb'))
+    learner2 = PSRL( nbS,nbA, delta=0.05)#, C = C, nC = nC, profile_mapping = profile_mapping)
+    names.append(learner2.name())
+    cumRewards2 = cumulativeRewards(env,learner2,nbReplicates,timeHorizon,rendermode)#, reverse = True)
+    cumRewards.append(cumRewards2)
+    pickle.dump(cumRewards2, open(("results/cumRewards_" + testName + "_" + learner2.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
-    learner3 = UCRL3_nested( nbS,nbA, delta=0.05)#, C = C, nC = nC)
-    names.append(learner3.name())
-    cumRewards3 = cumulativeRewards(env,learner3,nbReplicates,timeHorizon,rendermode)#, reverse = True)
-    cumRewards.append(cumRewards3)
+    # learner3 = UCRL3_nested( nbS,nbA, delta=0.05)#, C = C, nC = nC)
+    # names.append(learner3.name())
+    # cumRewards3 = cumulativeRewards(env,learner3,nbReplicates,timeHorizon,rendermode)#, reverse = True)
+    # cumRewards.append(cumRewards3)
     #pickle.dump(cumRewards3, open(("results/cumRewards_" + testName + "_" + learner3.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
-    #learner4 = C_UCRL_C9_fixed( nbS,nbA, delta=0.05, C = C, nC = nC)
-    #names.append(learner4.name())
-    #cumRewards4 = cumulativeRewards(env,learner4,nbReplicates,timeHorizon,rendermode)#, reverse = True)
-    #cumRewards.append(cumRewards4)
-    #pickle.dump(cumRewards4, open(("results/cumRewards_" + testName + "_" + learner4.name() + "_" + str(timeHorizon) + sup), 'wb'))
+    learner4 = C_UCRL_C9_fixed( nbS,nbA, delta=0.05, C = C, nC = nC)
+    names.append(learner4.name())
+    cumRewards4 = cumulativeRewards(env,learner4,nbReplicates,timeHorizon,rendermode)#, reverse = True)
+    cumRewards.append(cumRewards4)
+    pickle.dump(cumRewards4, open(("results/cumRewards_" + testName + "_" + learner4.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
     #learner5 = UCRL3_old( nbS,nbA, delta=0.05)#, C = C, nC = nC)#, sizeSupport = sizeSupport)#, T = timeHorizon)
     #names.append(learner5.name())
@@ -113,29 +113,29 @@ def run_exp(rendermode='', testName = "riverSwim", sup = ''):
     #cumRewards.append(cumRewards5)
     #pickle.dump(cumRewards5, open(("results/cumRewards_" + testName + "_" + learner5.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
-    #learner6 = KL_UCRL( nbS,nbA, delta=0.05)#, c = 5)
-    #names.append(learner6.name())
-    #cumRewards6 = cumulativeRewards(env,learner6,nbReplicates,timeHorizon,rendermode)
-    #cumRewards.append(cumRewards6)
-    #pickle.dump(cumRewards6, open(("results/cumRewards_" + testName + "_" + learner6.name() + "_" + str(timeHorizon) + sup), 'wb'))
+    learner6 = KL_UCRL( nbS,nbA, delta=0.05)#, c = 5)
+    names.append(learner6.name())
+    cumRewards6 = cumulativeRewards(env,learner6,nbReplicates,timeHorizon,rendermode)
+    cumRewards.append(cumRewards6)
+    pickle.dump(cumRewards6, open(("results/cumRewards_" + testName + "_" + learner6.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
-    #learner7 = UCRL2_L_boost( nbS,nbA, delta=0.05)
-    #names.append(learner7.name())
-    #cumRewards7 = cumulativeRewards(env,learner7,nbReplicates,timeHorizon,rendermode)
-    #cumRewards.append(cumRewards7)
-    #pickle.dump(cumRewards7, open(("results/cumRewards_" + testName + "_" + learner7.name() + "_" + str(timeHorizon) + sup), 'wb'))
+    learner7 = UCRL2_L_boost( nbS,nbA, delta=0.05)
+    names.append(learner7.name())
+    cumRewards7 = cumulativeRewards(env,learner7,nbReplicates,timeHorizon,rendermode)
+    cumRewards.append(cumRewards7)
+    pickle.dump(cumRewards7, open(("results/cumRewards_" + testName + "_" + learner7.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
-    #learner8 = SCAL_L( nbS,nbA, delta=0.05, c = 5)
-    #names.append(learner8.name())
-    #cumRewards8 = cumulativeRewards(env,learner8,nbReplicates,timeHorizon,rendermode)#, reverse = True)
-    #cumRewards.append(cumRewards8)
-    #pickle.dump(cumRewards8, open(("results/cumRewards_" + testName + "_" + learner8.name() + "_" + str(timeHorizon) + sup), 'wb'))
+    learner8 = SCAL_L( nbS,nbA, delta=0.05, c = 5)
+    names.append(learner8.name())
+    cumRewards8 = cumulativeRewards(env,learner8,nbReplicates,timeHorizon,rendermode)#, reverse = True)
+    cumRewards.append(cumRewards8)
+    pickle.dump(cumRewards8, open(("results/cumRewards_" + testName + "_" + learner8.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
-    #learner9 = SCAL_L( nbS,nbA, delta=0.05, c = 2)
-    #names.append(learner9.name())
-    #cumRewards9 = cumulativeRewards(env,learner9,nbReplicates,timeHorizon,rendermode)#, reverse = True)
-    #cumRewards.append(cumRewards9)
-    #pickle.dump(cumRewards9, open(("results/cumRewards_" + testName + "_" + learner9.name() + "_" + str(timeHorizon) + sup), 'wb'))
+    learner9 = SCAL_L( nbS,nbA, delta=0.05, c = 2)
+    names.append(learner9.name())
+    cumRewards9 = cumulativeRewards(env,learner9,nbReplicates,timeHorizon,rendermode)#, reverse = True)
+    cumRewards.append(cumRewards9)
+    pickle.dump(cumRewards9, open(("results/cumRewards_" + testName + "_" + learner9.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
     #learner10 = SCAL_L( nbS,nbA, delta=0.05, c = 5)
     #names.append(learner10.name())
@@ -143,11 +143,11 @@ def run_exp(rendermode='', testName = "riverSwim", sup = ''):
     #cumRewards.append(cumRewards10)
     #pickle.dump(cumRewards10, open(("results/cumRewards_" + testName + "_" + learner10.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
-    #learner11 = SCAL_L( nbS,nbA, delta=0.05, c = 10)
-    #names.append(learner11.name())
-    #cumRewards11 = cumulativeRewards(env,learner11,nbReplicates,timeHorizon,rendermode)#, reverse = True)
-    #cumRewards.append(cumRewards11)
-    #pickle.dump(cumRewards11, open(("results/cumRewards_" + testName + "_" + learner11.name() + "_" + str(timeHorizon) + sup), 'wb'))
+    learner11 = SCAL_L( nbS,nbA, delta=0.05, c = 10)
+    names.append(learner11.name())
+    cumRewards11 = cumulativeRewards(env,learner11,nbReplicates,timeHorizon,rendermode)#, reverse = True)
+    cumRewards.append(cumRewards11)
+    pickle.dump(cumRewards11, open(("results/cumRewards_" + testName + "_" + learner11.name() + "_" + str(timeHorizon) + sup), 'wb'))
     
     #learner12 = SCAL_L( nbS,nbA, delta=0.05, c = 20)
     #names.append(learner12.name())

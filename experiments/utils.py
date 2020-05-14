@@ -1,6 +1,7 @@
 from environments import gridworld, discreteMDP
 import pylab as pl
 import gym
+import os
 import pickle
 from gym.envs.registration import  register
 import numpy as np
@@ -165,7 +166,9 @@ def plotCumulativeRegrets(names,cumulativerewards_, timeHorizon, testName = "riv
     #print(len(cumulativerewards_[0]), len(cumulativerewards_))#[0])#print(len(cumulativerewards_[0]), cumulativerewards_[0])
     nbFigure = pl.gcf().number+1
     pl.figure(nbFigure)
-    textfile = "results/Regret-"
+    cur_dir = os.path.abspath(os.path.curdir)
+    output_path = os.path.join(cur_dir, 'results')
+    textfile = output_path + "/Regret-"
     colors= ['black', 'blue','gray', 'green', 'red']#['black', 'purple', 'blue','cyan','yellow', 'orange', 'red', 'chocolate']
     avgcum_rs= [ np.mean(cumulativerewards_[-1], axis=0) - np.mean(cumulativerewards_[i], axis=0) for  i in range(len(cumulativerewards_) - 1)]
     std_cum_rs= [ 1.96 * np.std(cumulativerewards_[i], axis=0) / np.sqrt(len(cumulativerewards_[i])) for  i in range(len(cumulativerewards_) - 1)]
@@ -191,8 +194,9 @@ def plotCumulativeRegrets(names,cumulativerewards_, timeHorizon, testName = "riv
         pl.ylim(100)
     else:
         pl.ylim(0)
-    #pl.savefig(textfile + testName + '.png')
-    pl.savefig(textfile + testName + '.pdf')
+
+    pl.savefig(textfile + testName + '.png')
+    # pl.savefig(textfile + testName + '.pdf')
 
 # This function computes nC and C parameters of C_UCRL_C for a given MDP, nC being the number of classes in this MDP and C its the matrix which
 # associate each pair of state-action (s, a) to its class (represented by a natural c in [0, nC - 1]).
